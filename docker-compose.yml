@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  webapp:
+    container_name: "webapp"
+    image: webapp:1.0
+    build:
+      context: ./ops-exercise-master
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    healthcheck:
+      test: ["CMD", "curl -f http://localhost:3000/health || exit 1"]
+      interval: 2m
+      timeout: 20s
+      retries: 3
+
+  mongodb:
+    container_name: "db"
+    image: mongobp:1.0
+    build:
+      context: ./ops-exercise-master/db
+      dockerfile: Dockerfile
+    ports:
+- "27017:27017"

@@ -28,7 +28,7 @@ print(json.dumps({'http code': r.status}, indent=4 * ' '))
 
 a = r.status
 b = 200
-while b == r.status:
+while b == a:
   print("service is up & running")
   break
 else:
